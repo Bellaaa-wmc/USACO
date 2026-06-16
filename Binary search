@@ -1,1 +1,49 @@
+#include <iostream>
+#include <unordered_set>
 
+using namespace std;
+
+bool unique (int k, string s)
+{
+    unordered_set<string> seen; 
+    for(int i =0; i<=s.size()-k; i++)
+    {
+         string sub = s.substr(i,k);
+         if(seen.count(sub))
+         {
+            return false;
+         }
+         else
+         {
+            seen.insert(sub);
+         }
+
+    }
+    return true; 
+}
+
+int main()
+{
+    int n; string s;
+    cin>> n>>s;
+    int low = 1; 
+    int hign = n; 
+    int mid; int ans; 
+    while (low<=hign)
+    {
+         mid = (low +hign)/2 ; 
+        if(unique(mid, s))
+        {
+            ans = mid; 
+            hign = mid -1; 
+        
+        }
+        else
+        {
+            low = mid +1; 
+        }
+
+    }
+     
+    cout << ans << endl;
+}
